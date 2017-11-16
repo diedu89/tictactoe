@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 
-import logo from './logo.svg';
 import './App.css';
+
+import Board from './containers/board';
 
 class App extends Component {
   render() {
@@ -13,11 +14,11 @@ class App extends Component {
           <Grid>
             <Grid>
               <Row>
-                <Col lgOffset={1} lg={7} style={{backgroundColor: 'tomato'}} >
-                  This is the space for the gameboard
+                <Col lgOffset={2} lg={6} >
+                  <Board />
                 </Col>
-                <Col lg={3} style={{backgroundColor: 'blue'}}>
-                  This is for other information
+                <Col lg={2} style={{backgroundColor: 'blue'}}>
+                  
                 </Col>
               </Row>
             </Grid>

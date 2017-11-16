@@ -1,13 +1,17 @@
-export default (state, action) => {
-	const { type, payload } = action;
+const defaultState = [
+  [null,null,null],
+  [null,null,null],
+  [null,null,null]
+];
 
-  switch (type) {
+export default (state = defaultState, action) => {
+  switch (action.type) {
     case 'MARK':
       return state.map((item, index) => {
-      	if(index != action.row)
+      	if(index !== action.row)
       		return item;
 
-      	return item.map((item, index) => (index == action.col && item == null) ? action.player : item); 
+      	return item.map((item, index) => (index === action.col && item === null) ? action.player : item); 
       });
     default:
       return state
