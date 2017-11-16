@@ -4,6 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import './App.css';
 
 import Board from './containers/board';
+import Player from './containers/player';
 
 class App extends Component {
   render() {
@@ -17,8 +18,8 @@ class App extends Component {
                 <Col lgOffset={2} lg={6} >
                   <Board />
                 </Col>
-                <Col lg={2} style={{backgroundColor: 'blue'}}>
-                  
+                <Col lg={2}>
+                  <Player />
                 </Col>
               </Row>
             </Grid>

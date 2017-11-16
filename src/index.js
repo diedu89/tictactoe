@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux'
 
 import './index.css';
@@ -17,9 +17,21 @@ const defaultState = {
 	],
 	size: 3,
 	turn: 0,
-	winner: null
+	winner: null,
+	currentPlayer: 'x'
 };
-const store = createStore(rootReducer, defaultState);
+
+const enhancers = []
+
+if (process.env.NODE_ENV === 'development') {
+  const devToolsExtension = window.devToolsExtension
+
+  if (typeof devToolsExtension === 'function') {
+    enhancers.push(devToolsExtension())
+  }
+}
+
+const store = createStore(rootReducer, defaultState, compose(...enhancers));
 
 ReactDOM.render(
 	<Provider store={store}>
