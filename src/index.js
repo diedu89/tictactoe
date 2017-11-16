@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
 import './index.css';
 import App from './App';
@@ -21,6 +22,10 @@ const defaultState = {
 	currentPlayer: 'x'
 };
 
+const middleware = [
+  thunk
+]
+
 const enhancers = []
 
 if (process.env.NODE_ENV === 'development') {
@@ -31,7 +36,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-const store = createStore(rootReducer, defaultState, compose(...enhancers));
+const store = createStore(rootReducer, defaultState, compose(applyMiddleware(...middleware), ...enhancers));
 
 ReactDOM.render(
 	<Provider store={store}>
