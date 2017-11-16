@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { markCell } from '../actions/index'
+import { markCell, notifyCellChange } from '../actions/index'
 
 class Cell extends Component {
   constructor(props){
@@ -23,6 +23,11 @@ class Cell extends Component {
         </div>
       );
   }
+
+  componentDidUpdate(prevProps, prevState){
+    const { value, notify, row, col } = this.props;
+    notify(row, col, value);
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,7 +38,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
-  mark: markCell
+  mark: markCell,
+  notify: notifyCellChange
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cell)
