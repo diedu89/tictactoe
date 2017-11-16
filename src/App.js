@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Grid, Row, Col } from 'react-bootstrap';
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,12 +9,20 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Tic Tac Toe</h1>
+          <Grid>
+            <Grid>
+              <Row>
+                <Col lgOffset={1} lg={7} style={{backgroundColor: 'tomato'}} >
+                  This is the space for the gameboard
+                </Col>
+                <Col lg={3} style={{backgroundColor: 'blue'}}>
+                  This is for other information
+                </Col>
+              </Row>
+            </Grid>
+          </Grid>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
