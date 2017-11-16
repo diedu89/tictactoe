@@ -9,7 +9,16 @@ import registerServiceWorker from './registerServiceWorker';
 
 import rootReducer from './reducers/index';
 
-const defaultState = {};
+const defaultState = {
+	board: [
+		[null,null,null],
+		[null,null,null],
+		[null,null,null]
+	],
+	size: 3,
+	turn: 0,
+	winner: null
+};
 const store = createStore(rootReducer, defaultState);
 
 ReactDOM.render(
