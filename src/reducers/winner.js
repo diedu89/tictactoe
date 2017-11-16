@@ -17,7 +17,7 @@ export default (state, action) => {
         }
       }
 
-      if(winner) return winner;
+      if(winner) return {player: winner, winType: 'row'};
 
       winner = player;
       //check for column
@@ -28,7 +28,7 @@ export default (state, action) => {
         }
       }
 
-      if(winner) return winner;
+      if(winner) return {player: winner, winType: 'col'};
 
       if(row != col) return null;
 
@@ -41,7 +41,7 @@ export default (state, action) => {
         }
       }
 
-      if(winner) return winner;
+      if(winner) return {player: winner, winType: 'down_diagonal'};
 
       if(col != size - row - 1) return null;
 
@@ -51,7 +51,7 @@ export default (state, action) => {
         if(board[i][j] != player) return null;
       }
 
-      return winner;
+      return {player: winner, winType:'up_diagonal'};
     default:
       return state
   }

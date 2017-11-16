@@ -17,14 +17,14 @@ describe('board reducer', () => {
 	})
 
 	const winnerBoards = [
-		{board: [['0','0','0'],[null,null,null],[null,null,null]], lastMove:{row: 0, col: 0}},
-		{board: [[null,null,null],['0','0','0'],[null,null,null]], lastMove:{row: 1, col: 0}},
-		{board: [[null,null,null],[null,null,null],['0','0','0']], lastMove:{row: 2, col: 0}},
-		{board: [['0',null,null],['0',null,null],['0',null,null]], lastMove:{row: 0, col: 0}},
-		{board: [[null,'0',null],[null,'0',null],[null,'0',null]], lastMove:{row: 0, col: 1}},
-		{board: [[null,null,'0'],[null,null,'0'],[null,null,'0']], lastMove:{row: 0, col: 2}},
-		{board: [['0',null,null],[null,'0',null],[null,null,'0']], lastMove:{row: 1, col: 1}},
-		{board: [[null,null,'0'],[null,'0',null],['0',null,null]], lastMove:{row: 1, col: 1}}
+		{board: [['0','0','0'],[null,null,null],[null,null,null]], lastMove:{row: 0, col: 0}, winType: 'row'},
+		{board: [[null,null,null],['0','0','0'],[null,null,null]], lastMove:{row: 1, col: 0}, winType: 'row'},
+		{board: [[null,null,null],[null,null,null],['0','0','0']], lastMove:{row: 2, col: 0}, winType: 'row'},
+		{board: [['0',null,null],['0',null,null],['0',null,null]], lastMove:{row: 0, col: 0}, winType: 'col'},
+		{board: [[null,'0',null],[null,'0',null],[null,'0',null]], lastMove:{row: 0, col: 1}, winType: 'col'},
+		{board: [[null,null,'0'],[null,null,'0'],[null,null,'0']], lastMove:{row: 0, col: 2}, winType: 'col'},
+		{board: [['0',null,null],[null,'0',null],[null,null,'0']], lastMove:{row: 1, col: 1}, winType: 'down_diagonal'},
+		{board: [[null,null,'0'],[null,'0',null],['0',null,null]], lastMove:{row: 1, col: 1}, winType: 'up_diagonal'}
 	]
 
 	function runWinner(data, i){
@@ -40,7 +40,7 @@ describe('board reducer', () => {
 							lastMove: data.lastMove
 						}
 				)
-			).toBe('0');
+			).toBe({player: '0', winType: data.winType});
 		})
 	}
 
