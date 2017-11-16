@@ -1,4 +1,4 @@
-const board = (state, action) => {
+export default (state, action) => {
 	const { type, payload } = action;
 
   switch (type) {
@@ -13,5 +13,3 @@ const board = (state, action) => {
       return state
   }
 }
-
-export default board;
