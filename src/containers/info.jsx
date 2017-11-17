@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
+import { playAgain } from '../actions/index';
+
 class GameInfo extends Component{
 
 	renderWinner(winner){
@@ -13,7 +15,7 @@ class GameInfo extends Component{
 	}
 
 	render(){
-		const { winner, player } = this.props;
+		const { winner, player, playAgain } = this.props;
 		if(!winner)
 			return (<h3>Turn of player {player}</h3>);
 
@@ -21,13 +23,17 @@ class GameInfo extends Component{
 	    <div>
 	      {this.renderWinner(winner)}
 	      <br/>
-	      <Button bsStyle="primary">Play again!</Button>
+	      <Button bsStyle="primary" onClick={() => playAgain()}>Play again!</Button>
 	    </div>
 	  );
 	}
 
 }
 
-export default connect(state => {
-  return {player: state.currentPlayer, winner: state.winner}
-})(GameInfo)
+const mapStateToProps = (state, ownProps) => {
+	return {player: state.currentPlayer, winner: state.winner}
+}
+
+const mapDispatchToProps = { playAgain }
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameInfo)

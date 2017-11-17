@@ -11,12 +11,16 @@ class Cell extends Component {
     return shouldUpdate;
   }
 
+  mark(){
+    const { value, mark, row, col, winner, currentPlayer } = this.props;
+    if(!value && !winner) 
+      mark(row, col, currentPlayer);
+  }
+
   render(){
-    const { value, mark, row, col } = this.props;
-    console.log("It changed " + row + " " + col + " " + value);
     return (
-        <div className="flex-item" onClick={() => { if(!this.props.value) mark(row, col, this.props.currentPlayer); } }>
-          {value ? value : " "}
+        <div className="flex-item" onClick={this.mark.bind(this)}>
+          {this.props.value ? this.props.value : " "}
         </div>
       );
   }
@@ -30,7 +34,8 @@ class Cell extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     currentPlayer: state.currentPlayer,
-    value: state.board[ownProps.row][ownProps.col]
+    value: state.board[ownProps.row][ownProps.col],
+    winner: state.winner
   }
 }
 
