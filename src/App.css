@@ -137,8 +137,34 @@ body{
   background-repeat: no-repeat;
 }
 
+.winner.x-player .back{
+  //background: red;
+  -webkit-animation-name: tomatoPulse;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.winner.o-player .back{
+  //background: red;
+  -webkit-animation-name: skybluePulse;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+}
+
 .current-player{
   width: 40%;
   padding-top: 40%; 
   margin: 0 auto;
+}
+
+@-webkit-keyframes tomatoPulse {
+  from { background-color: tomato; }
+  50% { background-color: red; -webkit-box-shadow: 0 0 100px red; }
+  to { background-color: tomato; }
+}
+
+@-webkit-keyframes skybluePulse {
+  from { background-color: skyblue; }
+  50% { background-color: blue; -webkit-box-shadow: 0 0 100px blue; }
+  to { background-color: skyblue; }
 }

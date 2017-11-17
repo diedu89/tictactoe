@@ -7,17 +7,38 @@ import { markCell, notifyCellChange } from '../actions/index'
 const classesName = {'x': ' x-player', '0': ' o-player'};
 
 class Cell extends Component {
+  constructor(props){
+    super(props);
+    this.isWinner = false;
+  }
 
   shouldComponentUpdate(nextProps, nextState){
-    const shouldUpdate = 
-      nextProps.value !== this.props.value || 
-      nextProps.currentPlayer !== this.props.currentPlayer || 
-      nextProps.winner !== this.props.winner;
+    var shouldUpdate = nextProps.value !== this.props.value;
+    shouldUpdate = shouldUpdate || nextProps.currentPlayer !== this.props.currentPlayer;
+
+    if (shouldUpdate && nextProps.winner && nextProps.winner.player === this.props.value){
+      this.isWinner = this.isInWinningRow(nextProps.winner);
+      shouldUpdate = this.isWinner;
+    }
+
     return shouldUpdate;
   }
 
-  componentWillUpdate(nextProps, nextState){
-    console.log(this.props);
+  isInWinningRow(winner){
+    const { row, col, size } = this.props;
+    switch(winner.winType){
+      case 'row':
+        return row === winner.lastMove.row;
+      case 'col':
+        return col === winner.lastMove.col;
+      case 'down_diagonal':
+        return row === col;
+      case 'up_diagonal':
+        return col === size - row - 1;
+      default:
+        return false;
+    }
+
   }
 
   mark(){
@@ -32,7 +53,9 @@ class Cell extends Component {
 
   flippable(){
     const { value, winner, currentPlayer } = this.props
-    var classes = (!this.props.value && !this.props.winner) ? "flipper" : "unflipped";
+    var classes = (!value && !winner) ? "flipper" : "unflipped";
+
+    classes += (winner && winner.player === value && this.isWinner) ? " winner" : "";
 
     if(value)
       return classes + classesName[value] + " flipped"; 
@@ -73,7 +96,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentPlayer: state.currentPlayer,
     value: state.board[ownProps.row][ownProps.col],
-    winner: state.winner
+    winner: state.winner,
+    size: state.size
   }
 }
 
