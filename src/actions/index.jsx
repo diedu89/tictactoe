@@ -35,3 +35,5 @@ export const playAgain = () => {
     });
   }
 }
+
+export const changeSize = (size) => ({type: "CHANGE_SIZE", size})

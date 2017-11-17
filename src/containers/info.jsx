@@ -15,6 +15,8 @@ class GameInfo extends Component{
 	}
 
 	render(){
+		if (this.props.configuring) return null;
+		
 		const { winner, player, playAgain } = this.props;
 		if(!winner)
 			return (<h3>Turn of player {player}</h3>);
@@ -31,7 +33,7 @@ class GameInfo extends Component{
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return {player: state.currentPlayer, winner: state.winner}
+	return {player: state.currentPlayer, winner: state.winner, configuring: state.configuring}
 }
 
 const mapDispatchToProps = { playAgain }

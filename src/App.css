@@ -43,3 +43,14 @@
     float:left;
     padding-top:100%;
 }
+
+.config-box {
+  width: 100%;
+  padding-top: 5%;
+  background: 'blue';
+}
+
+.config-box h2, .config-box h3, .config-box .rc-slider, .config-box button {
+  margin-top: 10px;
+  margin-bottom: 10px; 
+} 
