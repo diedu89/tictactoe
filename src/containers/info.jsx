@@ -30,19 +30,22 @@ class GameInfo extends Component{
 		if (this.props.configuring) return null;
 		
 		const { winner, player, playAgain, configure } = this.props;
-		if(!winner)
-			return (
-				<div>
-					<h3>Turn of player</h3>
-					<div className={this.getClassName(player)}></div>
-				</div>
-			);
 
 		return (
 	    <div>
-	      {this.renderWinner(winner)}
+	      {
+	      	(winner) ? 
+	      		this.renderWinner(winner)
+	      	:
+  					<div>
+							<h3>Turn of player</h3>
+							<div className={this.getClassName(player)}></div>
+						</div>
+	      }
 	      <br/>
-	      <Button bsStyle="primary" onClick={() => playAgain()}>Play again!</Button>
+	      <Button bsStyle="primary" onClick={() => playAgain()}>
+	      	{(winner) ? 'Play again!' : 'Restart game'}
+	      </Button>
 	      <br /><br />
 	      <Button bsStyle="primary" onClick={() => configure()}>Change size of the board</Button>
 	    </div>
