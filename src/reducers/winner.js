@@ -65,6 +65,8 @@ export default (state = null, action) => {
       }
 
       return {player: winner, lastMove, winType:'up_diagonal'};
+    case 'RESET':
+      return null;
     default:
       return state
   }
