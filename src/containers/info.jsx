@@ -11,7 +11,19 @@ class GameInfo extends Component{
 		if(winner.player === 'none')
 			return (<h2>It's a draw!!</h2>);
 
-		return (<h2>Congrats player {winner.player}, You WON!!! </h2>);
+		return (
+			<div>
+				<h2>Congrats player</h2>
+				<div className={this.getClassName(winner.player)}></div>
+				<h2>You WON!!!</h2>
+			</div>
+		);
+	}
+
+	getClassName(player){
+		console.log(player);
+		return "current-player " +
+			((player === '0') ? "o-player" : "x-player");
 	}
 
 	render(){
@@ -19,7 +31,12 @@ class GameInfo extends Component{
 		
 		const { winner, player, playAgain, configure } = this.props;
 		if(!winner)
-			return (<h3>Turn of player {player}</h3>);
+			return (
+				<div>
+					<h3>Turn of player</h3>
+					<div className={this.getClassName(player)}></div>
+				</div>
+			);
 
 		return (
 	    <div>

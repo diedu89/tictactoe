@@ -1,3 +1,7 @@
+body{
+  background: #fafafa;
+}
+
 .App {
 /*  margin: 0 auto;
   background: red;
@@ -95,7 +99,7 @@
 .front {
   z-index: 2;
   /* for firefox 31 */
-  background: tomato;
+  background: burlywood;
   transform: rotateY(0deg);
 }
 
@@ -108,9 +112,17 @@
 .x-player{
   background-image: url('images/sign-x.png');
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .o-player{
   background-image: url('images/sign-o.png');
   background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.current-player{
+  width: 40%;
+  padding-top: 40%; 
+  margin: 0 auto;
 }
