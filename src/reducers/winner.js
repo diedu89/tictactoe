@@ -1,57 +1,70 @@
-export default (state, action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case 'CHECK_WINNER':
       const { board, turn, size, lastMove } = action;
       const { row, col } = lastMove;
-      if(action.turn < action.size)
+      var noWinnerResult = null;
+
+      //if it's the last turn should return a draw
+      if(turn >= Math.ceil((size * size)/2))
+        noWinnerResult = {
+          player: 'none',
+          winType: 'none'
+        };
+
+      if(turn < size)
         return state;
 
       var player = board[row][col];
       var winner = player;
+      var i = 0;
 
       //check row
-      for (var i = 0; i < size; i++) {
-        if(board[row][i] != player){
+      for (i = 0; i < size; i++) {
+        if(board[row][i] !== player){
           winner = null;
           break;
         }
       }
 
-      if(winner) return {player: winner, winType: 'row'};
+      if(winner) return {player: winner, lastMove, winType: 'row'};
 
       winner = player;
       //check for column
-      for (var i = 0; i < size; i++) {
-        if(board[i][col] != player){
+      for (i = 0; i < size; i++) {
+        if(board[i][col] !== player){
           winner = null;
           break;
         }
       }
 
-      if(winner) return {player: winner, winType: 'col'};
+      if(winner) return {player: winner, lastMove, winType: 'col'};
 
-      if(row != col) return null;
+      if(row !== col) return noWinnerResult;
 
       winner = player;
       //check for down diagonal
-      for (var i = 0; i < size; i++) {
-        if(board[i][i] != player){
+      for (i = 0; i < size; i++) {
+        if(board[i][i] !== player){
           winner = null;
           break;
         }
       }
 
-      if(winner) return {player: winner, winType: 'down_diagonal'};
+      if(winner) return {player: winner, lastMove, winType: 'down_diagonal'};
 
-      if(col != size - row - 1) return null;
+      if(col !== size - row - 1) return noWinnerResult;
 
       //check for up diagonal
       winner = player;
-      for (var i = 0, j= size - 1; i < size; i++, j--) {
-        if(board[i][j] != player) return null;
+      var j = size - 1;
+      for (i = 0; i < size; i++, j--) {
+        if(board[i][j] !== player){
+          return noWinnerResult
+        } 
       }
 
-      return {player: winner, winType:'up_diagonal'};
+      return {player: winner, lastMove, winType:'up_diagonal'};
     default:
       return state
   }

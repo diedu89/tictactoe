@@ -40,7 +40,7 @@ describe('board reducer', () => {
 							lastMove: data.lastMove
 						}
 				)
-			).toBe({player: '0', winType: data.winType});
+			).toEqual({player: '0', winType: data.winType, lastMove: data.lastMove});
 		})
 	}
 
@@ -79,4 +79,20 @@ describe('board reducer', () => {
 	for (var i = 0; i < winnerBoards.length; i++) {
 		runNoWinner(noWinnerBoards[i], i);
 	}
+
+	it("should declare a draw", () => {
+		expect(
+			winner(
+					null,
+					{
+						type: "CHECK_WINNER",
+						turn: 5,
+						size: 3,
+						board: [['x','0','x'],['x','0','0'],['0','x','x']],
+						lastMove: {row: 1, col: 2}
+					}
+			)
+		).toEqual({player: 'none', winType: 'none'});
+	});
+
 })	
