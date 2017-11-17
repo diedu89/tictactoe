@@ -3,6 +3,14 @@ export default (state = null, action) => {
     case 'CHECK_WINNER':
       const { board, turn, size, lastMove } = action;
       const { row, col } = lastMove;
+      var noWinnerResult = null;
+
+      //if it's the last turn should return a draw
+      if(turn >= Math.ceil((size * size)/2))
+        noWinnerResult = {
+          player: 'none',
+          winType: 'none'
+        };
 
       if(turn < size)
         return state;
@@ -32,7 +40,7 @@ export default (state = null, action) => {
 
       if(winner) return {player: winner, lastMove, winType: 'col'};
 
-      if(row !== col) return null;
+      if(row !== col) return noWinnerResult;
 
       winner = player;
       //check for down diagonal
@@ -45,27 +53,18 @@ export default (state = null, action) => {
 
       if(winner) return {player: winner, lastMove, winType: 'down_diagonal'};
 
-      if(col !== size - row - 1) return null;
+      if(col !== size - row - 1) return noWinnerResult;
 
       //check for up diagonal
       winner = player;
       var j = size - 1;
       for (i = 0; i < size; i++, j--) {
         if(board[i][j] !== player){
-
-          //it was the last turn, so the game ended in draw
-          if(turn >= Math.ceil((size * size)/2))
-            return {
-              player: 'none',
-              lastMove, winType: 'none'
-            };
-
-          return null;
+          return noWinnerResult
         } 
       }
 
       return {player: winner, lastMove, winType:'up_diagonal'};
-
     default:
       return state
   }

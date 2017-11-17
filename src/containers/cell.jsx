@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 import { markCell, notifyCellChange } from '../actions/index'
 
 class Cell extends Component {
-  constructor(props){
-    super(props);
-  }
 
   shouldComponentUpdate(nextProps, nextState){
     const shouldUpdate = nextProps.value !== this.props.value;
