@@ -41,4 +41,18 @@ describe('board reducer', () => {
 			)
 		).toEqual(emptyBoard);
 	});
+
+	it("should change board's dimension", ()=>{
+		const newBoard = [[null,null,null,null],[null,null,null,null],[null,null,null,null],[null,null,null,null]];
+		deepFreeze(newBoard);
+		expect(
+			board(
+				emptyBoard,
+				{
+					type: 'CHANGE_SIZE',
+					size: 4
+				}
+			)
+		).toEqual(newBoard);
+	});
 })	
