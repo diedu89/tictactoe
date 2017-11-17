@@ -20,6 +20,7 @@ class App extends Component {
                 </Col>
                 <Col lg={2}>
                   <Player />
+                  
                 </Col>
               </Row>
             </Grid>
