@@ -40,18 +40,19 @@ export default (state = null, action) => {
 
       if(winner) return {player: winner, lastMove, winType: 'col'};
 
-      if(row !== col) return noWinnerResult;
-
-      winner = player;
-      //check for down diagonal
-      for (i = 0; i < size; i++) {
-        if(board[i][i] !== player){
-          winner = null;
-          break;
+      if(row === col){
+        winner = player;
+        //check for down diagonal
+        for (i = 0; i < size; i++) {
+          if(board[i][i] !== player){
+            winner = null;
+            break;
+          }
         }
+
+        if(winner) return {player: winner, lastMove, winType: 'down_diagonal'};
       }
 
-      if(winner) return {player: winner, lastMove, winType: 'down_diagonal'};
 
       if(col !== size - row - 1) return noWinnerResult;
 
@@ -65,6 +66,8 @@ export default (state = null, action) => {
       }
 
       return {player: winner, lastMove, winType:'up_diagonal'};
+    case 'RESET':
+      return null;
     default:
       return state
   }
