@@ -2,8 +2,8 @@ import board from './board';
 import deepFreeze from 'deep-freeze';
 
 describe('board reducer', () => {
+	const emptyBoard = [[null,null,null],[null,null,null],[null,null,null]];
 	it('should change the mark in a cell', () => {
-		const emptyBoard = [[null,null,null],[null,null,null],[null,null,null]];
 		deepFreeze(emptyBoard);
 		expect(
 			board(
@@ -26,5 +26,19 @@ describe('board reducer', () => {
 				}
 			)
 		).toEqual([[null,null,null],[null,'0',null],[null,null,null]]);
+	});
+
+	it("should reset the board", ()=>{
+		const filledBoard = [['x','0','x'],['x','0','0'],['0','x','x']];
+		deepFreeze(filledBoard);
+		expect(
+			board(
+				filledBoard,
+				{
+					type: 'RESET',
+					size: 3
+				}
+			)
+		).toEqual(emptyBoard);
 	});
 })	
