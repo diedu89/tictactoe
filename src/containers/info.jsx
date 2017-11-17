@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { playAgain } from '../actions/index';
+import { playAgain, configure } from '../actions/index';
 
 class GameInfo extends Component{
 
@@ -15,7 +15,9 @@ class GameInfo extends Component{
 	}
 
 	render(){
-		const { winner, player, playAgain } = this.props;
+		if (this.props.configuring) return null;
+		
+		const { winner, player, playAgain, configure } = this.props;
 		if(!winner)
 			return (<h3>Turn of player {player}</h3>);
 
@@ -24,6 +26,8 @@ class GameInfo extends Component{
 	      {this.renderWinner(winner)}
 	      <br/>
 	      <Button bsStyle="primary" onClick={() => playAgain()}>Play again!</Button>
+	      <br /><br />
+	      <Button bsStyle="primary" onClick={() => configure()}>Change size of the board</Button>
 	    </div>
 	  );
 	}
@@ -31,9 +35,9 @@ class GameInfo extends Component{
 }
 
 const mapStateToProps = (state, ownProps) => {
-	return {player: state.currentPlayer, winner: state.winner}
+	return {player: state.currentPlayer, winner: state.winner, configuring: state.configuring}
 }
 
-const mapDispatchToProps = { playAgain }
+const mapDispatchToProps = { playAgain, configure }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameInfo)

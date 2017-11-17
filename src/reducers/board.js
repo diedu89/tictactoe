@@ -14,17 +14,21 @@ export default (state = defaultState, action) => {
       	return item.map((item, index) => (index === action.col && item === null) ? action.player : item); 
       });
     case 'RESET':
-      var board = [];
-      for (var i = 0; i < action.size; i++) {
-        var row = [];
-        for (var j = 0; j < action.size; j++) 
-          row.push(null);
-        
-        board.push(row)
-      };
-
-      return board;
+    case 'CHANGE_SIZE':
+      return createBoard(action.size);
     default:
       return state
   }
+}
+
+const createBoard = function(size){
+  var board = [];
+  for (var i = 0; i < size; i++) {
+    var row = [];
+    for (var j = 0; j < size; j++) 
+      row.push(null);
+    
+    board.push(row)
+  };
+  return board;
 }

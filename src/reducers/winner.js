@@ -4,18 +4,20 @@ export default (state = null, action) => {
       const { board, turn, size, lastMove } = action;
       const { row, col } = lastMove;
       var noWinnerResult = null;
-
+      var player = board[row][col];
+      
       //if it's the last turn should return a draw
-      if(turn >= Math.ceil((size * size)/2))
-        noWinnerResult = {
-          player: 'none',
-          winType: 'none'
-        };
+      if(turn >= Math.ceil((size * size)/2)){
+        if((size % 2 === 1) || (size % 2 === 0 && player === '0'))
+          noWinnerResult = {
+            player: 'none',
+            winType: 'none'
+          };
+      }
 
       if(turn < size)
         return state;
 
-      var player = board[row][col];
       var winner = player;
       var i = 0;
 
@@ -67,6 +69,7 @@ export default (state = null, action) => {
 
       return {player: winner, lastMove, winType:'up_diagonal'};
     case 'RESET':
+    case 'CHANGE_SIZE':
       return null;
     default:
       return state
