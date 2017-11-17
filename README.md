@@ -1,4 +1,4 @@
-#Tic Tac Toe
+# Tic Tac Toe
 
 N board tic tac toe developed in react+redux
 
