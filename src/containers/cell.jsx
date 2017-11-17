@@ -4,6 +4,8 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { markCell, notifyCellChange } from '../actions/index'
 
+const classesName = {'x': ' x-player', '0': ' o-player'};
+
 class Cell extends Component {
 
   shouldComponentUpdate(nextProps, nextState){
@@ -24,35 +26,21 @@ class Cell extends Component {
       mark(row, col, currentPlayer);
   }
 
-  getBackClassName(){
-    var classes = "back";
-    if(!this.props.value){
-      console.log(this.props)
-      if(this.props.currentPlayer === '0')
-        classes += " o-player";
-      else
-        classes += " x-player";
-    }
-    return classes;  
-  }
-
-  getFrontClassName(){
-    var classes = "front";
-    if(this.props.value){
-      if(this.props.value === '0')
-        classes += " o-player";
-      else
-        classes += " x-player";
-    }
-    return classes; 
-  }
-
   flip(){
     this.classNameList.toggle('hover');
   }
 
   flippable(){
-    return (!this.props.value && !this.props.winner) ? "flipper" : "";
+    const { value, winner, currentPlayer } = this.props
+    var classes = (!this.props.value && !this.props.winner) ? "flipper" : "unflipped";
+
+    if(value)
+      return classes + classesName[value] + " flipped"; 
+    
+    if(!winner)
+      return classes + classesName[currentPlayer];
+
+    return classes;
   }
 
   render(){
@@ -62,10 +50,10 @@ class Cell extends Component {
           {/*this.props.value ? this.props.value : " "*/}
           <div className="flip-container" onTouchStart={this.flip}>
             <div className={this.flippable()}>
-              <div className={this.getFrontClassName()}>
+              <div className="front">
                 
               </div>
-              <div className={this.getBackClassName()}>
+              <div className="back">
                 
               </div>
             </div>

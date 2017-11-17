@@ -96,26 +96,42 @@ body{
 }
 
 /* front pane, placed above back */
-.front {
+.flipper .front, .unflipped .front{
   z-index: 2;
   /* for firefox 31 */
-  background: burlywood;
+  background: silver;
   transform: rotateY(0deg);
 }
 
 /* back, initially hidden pane */
-.back {
+.flipper .back {
   background: skyblue;
   transform: rotateY(180deg);
 }
 
-.x-player{
+/* front pane, placed above back */
+.flipped .front {
+  /* for firefox 31 */
+  background: silver;
+  transform: rotateY(180deg);
+}
+
+/* back, initially hidden pane */
+.flipped .back {
+  z-index: 2;
+  background: skyblue;
+  transform: rotateY(0deg);
+}
+
+.x-player .back, .x-player.current-player{
+  background-color: tomato;
   background-image: url('images/sign-x.png');
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.o-player{
+.o-player .back, .o-player.current-player{
+  background-color: skyblue; 
   background-image: url('images/sign-o.png');
   background-size: contain;
   background-repeat: no-repeat;
