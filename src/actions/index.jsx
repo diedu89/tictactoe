@@ -36,4 +36,6 @@ export const playAgain = () => {
   }
 }
 
-export const changeSize = (size) => ({type: "CHANGE_SIZE", size})
+export const changeSize = (size) => ({type: "CHANGE_SIZE", size});
+
+export const configure = () => ({type: "CONFIGURE"});
