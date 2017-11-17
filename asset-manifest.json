@@ -1,6 +1,8 @@
 {
-  "main.css": "static/css/main.1ffb3ea7.css",
-  "main.css.map": "static/css/main.1ffb3ea7.css.map",
+  "main.css": "static/css/main.96b371a7.css",
+  "main.css.map": "static/css/main.96b371a7.css.map",
   "main.js": "static/js/main.052ab168.js",
-  "main.js.map": "static/js/main.052ab168.js.map"
+  "main.js.map": "static/js/main.052ab168.js.map",
+  "static/media/sign-o.png": "static/media/sign-o.b3305403.png",
+  "static/media/sign-x.png": "static/media/sign-x.7ebf5a82.png"
 }
