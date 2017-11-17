@@ -19,7 +19,8 @@ export const notifyCellChange = (row, col, player) => {
 					player: state.currentPlayer,
 					lastMove: {row, col},
 					board: state.board,
-					size: state.size
+					size: state.size,
+          turn: state.turn
         });
     }
 }

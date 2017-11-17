@@ -18,7 +18,7 @@ class Cell extends Component {
     const { value, mark, row, col } = this.props;
     console.log("It changed " + row + " " + col + " " + value);
     return (
-        <div className="flex-item" onClick={() => mark(row, col, this.props.currentPlayer)}>
+        <div className="flex-item" onClick={() => { if(!this.props.value) mark(row, col, this.props.currentPlayer); } }>
           {value ? value : " "}
         </div>
       );
